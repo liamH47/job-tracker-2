@@ -4,15 +4,17 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+import jobRoutes from './routes/jobs.js'
 
 const app = express();
 dotenv.config()
+
+app.use('/jobs', jobRoutes);
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-// const CONNECTION_URL = 'mongodb+srv://liam:87npU6Qft3ZWYzn2@cluster0.rpui1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
 
 mongoose.set('useFindAndModify', false);
