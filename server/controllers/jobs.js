@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Job from '../models/job.js'
 
 export const getJobs = async (req, res) => {
@@ -19,4 +20,12 @@ export const createJob = async (req, res) => {
     } catch (error) {
         res.status(409).json({ message: error.message})
     }
+}
+
+export const updateJob = async (req, res) => {
+    const { id: _id } = req.params;
+    const job = req.body;
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No job with that ID');
+    const updatedJob = await Job.findByIdAndUpdate(_id, job, { new: true });
+    res.json(updatedJob);
 }

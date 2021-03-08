@@ -17,7 +17,10 @@ const jobSchema = mongoose.Schema({
         type: String,
         default: "Preparing"
     },
-    followed_up: Boolean
+    followed_up: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const Job = mongoose.model('Job', jobSchema);
