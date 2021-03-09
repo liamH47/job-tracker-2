@@ -26,6 +26,6 @@ export const updateJob = async (req, res) => {
     const { id: _id } = req.params;
     const job = req.body;
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No job with that ID');
-    const updatedJob = await Job.findByIdAndUpdate(_id, job, { new: true });
+    const updatedJob = await Job.findByIdAndUpdate(_id, { ...job, _id }, { new: true });
     res.json(updatedJob);
 }
