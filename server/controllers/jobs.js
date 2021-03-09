@@ -29,3 +29,10 @@ export const updateJob = async (req, res) => {
     const updatedJob = await Job.findByIdAndUpdate(_id, { ...job, _id }, { new: true });
     res.json(updatedJob);
 }
+
+export const deleteJob = async (req, res) => {
+    const { id } = req.params;
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No job with that ID');
+    await Job.findByIdAndRemove(id);
+    res.json({ message: 'Job successfully deleted' });
+}
